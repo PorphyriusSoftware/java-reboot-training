@@ -1,1 +1,4 @@
-com/porphyriussoftware/StringSanitizer.class
+com\porphyriussoftware\StringSanitizer.class
+com\porphyriussoftware\StreamUtils.class
+com\porphyriussoftware\SmartFilter.class
+com\porphyriussoftware\OptionalUtils.class

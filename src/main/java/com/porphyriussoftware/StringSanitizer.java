@@ -20,6 +20,8 @@ import java.text.Normalizer;
  */
 public class StringSanitizer {
 
+    private StringSanitizer() {}
+
     /**
      * Sanitizes the given input string according to the rules described above.
      *
