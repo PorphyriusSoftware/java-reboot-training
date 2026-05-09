@@ -1,3 +1,7 @@
+![Build Status](https://img.shields.io/github/actions/workflow/status/PorphyriusSoftware/java-reboot-training/ci.yml?label=CI&logo=github)
+![Java](https://img.shields.io/badge/Java-21-orange?logo=openjdk)
+![Tests](https://img.shields.io/badge/Tests-Passing-brightgreen?logo=checkmarx)
+
 # Java Reboot — Training Repository
 
 This repository is a structured, incremental training ground for rebuilding and sharpening Java fundamentals.  
