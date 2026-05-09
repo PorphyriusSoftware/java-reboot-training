@@ -7,8 +7,10 @@ import java.util.*;
  * <p>
  * This implementation intentionally reuses {@link OptionalUtils} to normalize
  * values before filtering or mapping, ensuring consistent behavior across modules.
+ *
+ * <p>This class is not meant to be instantiated.</p>
  */
-public class StreamUtils{
+public final class StreamUtils{
 
     private StreamUtils() {}
 
@@ -75,6 +77,7 @@ public class StreamUtils{
         return Optional.ofNullable(input)
             .orElse(List.of())
             .stream()
+            .filter(Objects::nonNull)
             .mapToInt(Integer::intValue)
             .sum();
     }

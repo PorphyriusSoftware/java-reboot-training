@@ -12,8 +12,10 @@ import java.util.List;
  *     <li>Filter by prefix</li>
  *     <li>Uppercase results</li>
  * </ol>
+ *
+ * <p>This class is not meant to be instantiated.</p>
  */
-public class SmartFilter {
+public final class SmartFilter {
 
     private SmartFilter() {}
 

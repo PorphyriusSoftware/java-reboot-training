@@ -8,8 +8,10 @@ import java.util.Optional;
  * <p>
  * This class centralizes trimming, blank-checking, and uppercase transformation
  * to ensure consistent behavior across all functional pipelines.
+ *
+ * <p>This class is not meant to be instantiated.</p>
  */
-public class OptionalUtils {
+public final class OptionalUtils {
 
     private OptionalUtils() {}
 

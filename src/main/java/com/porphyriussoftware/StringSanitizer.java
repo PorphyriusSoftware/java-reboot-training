@@ -5,7 +5,7 @@ import java.text.Normalizer;
 /**
  * Utility class for cleaning and normalizing user-provided text.
  *
- * <p>Sanitization rules:
+ * Sanitization rules:
  * <ul>
  *   <li>Unicode is normalized using NFC form.</li>
  *   <li>Control characters (\\p{Cntrl}) are replaced with spaces.</li>
@@ -16,9 +16,11 @@ import java.text.Normalizer;
  *
  * <p>This sanitizer is intentionally simple and deterministic.
  * It avoids complex heuristics and ensures predictable output
- * suitable for names, labels, and general user input.
+ * suitable for names, labels, and general user input.</p>
+ *
+ * <p>This class is not meant to be instantiated.</p>
  */
-public class StringSanitizer {
+public final class StringSanitizer {
 
     private StringSanitizer() {}
 

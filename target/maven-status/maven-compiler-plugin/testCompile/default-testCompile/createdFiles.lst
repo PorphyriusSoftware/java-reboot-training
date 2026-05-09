@@ -1,3 +1,4 @@
-com\porphyriussoftware\FunctionalUtilitiesTest.class
-com\porphyriussoftware\TestResultExtension.class
-com\porphyriussoftware\StringSanitizerTest.class
+com/porphyriussoftware/NumberUtilitiesTest.class
+com/porphyriussoftware/StringSanitizerTest.class
+com/porphyriussoftware/FunctionalUtilitiesTest.class
+com/porphyriussoftware/TestResultExtension.class
