@@ -47,23 +47,18 @@ The goal is to build a modern Java skillset with:
 
 ## 📁 Project Structure
 
+```
 java-reboot-training/
-│
 ├── assets/
 │   └── banner-variant-s.svg
-│
 ├── src/
 │   ├── main/
 │   │   └── java/
-│   │       └── ...
 │   └── test/
 │       └── java/
-│           └── ...
-│
 ├── pom.xml
 └── README.md
-
-Code
+```
 
 - `src/main/java` → application code
 - `src/test/java` → unit tests
