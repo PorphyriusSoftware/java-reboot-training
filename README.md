@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="assets/banner-variant-s.svg" width="100%" alt="Java Reboot Training Banner"/>
+  <img src="assets/banner.svg" width="100%" alt="Java Reboot Training Banner"/>
 </p>
 
 <h1 align="center">Java Reboot Training</h1>
