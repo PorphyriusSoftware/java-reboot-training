@@ -1,4 +1,4 @@
-package com.porphyriussoftware;
+package com.porphyriussoftware.module001;
 
 import java.text.Normalizer;
 

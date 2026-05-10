@@ -1,4 +1,4 @@
-package com.porphyriussoftware;
+package com.porphyriussoftware.module001;
 
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;

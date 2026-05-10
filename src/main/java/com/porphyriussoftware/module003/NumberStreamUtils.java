@@ -1,4 +1,6 @@
-package com.porphyriussoftware;
+package com.porphyriussoftware.module003;
+
+import com.porphyriussoftware.module002.StreamUtils;
 
 import java.util.List;
 import java.util.Objects;
