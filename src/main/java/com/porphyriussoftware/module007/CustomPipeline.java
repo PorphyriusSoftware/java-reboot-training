@@ -66,7 +66,7 @@ public final class CustomPipeline<T> {
      * @param <OUT> the type of elements leaving this stage
      */
     @FunctionalInterface
-    interface SinkWrapper<IN, OUT> {
+    public interface SinkWrapper<IN, OUT> {
 
         /**
          * Wraps a downstream Sink in an upstream Sink for this stage.

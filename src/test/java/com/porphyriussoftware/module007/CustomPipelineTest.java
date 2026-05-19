@@ -433,7 +433,7 @@ class CustomPipelineTest {
 
         List<Integer> fromToList = CustomPipeline.of(source).toList();
 
-        System.out.println("AFTER:  fromForEach=" + fromForEach + ", fromToList=" + fromToList);
+        System.out.println("AFTER:  fromForEach=" + fromForEach + ", fromToList=" + fromToList + " (must be equal — same order)");
 
         assertEquals(fromToList, fromForEach,
             "forEach and toList must visit elements in the same order. " +

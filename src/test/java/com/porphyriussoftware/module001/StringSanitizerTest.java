@@ -36,52 +36,79 @@ class StringSanitizerTest {
     // Ensures leading and trailing whitespace is removed.
     @Test
     void trimsWhitespace() {
-        assertEquals("Hello", StringSanitizer.sanitize("   Hello   "));
+        String input = "   Hello   ";
+        System.out.println("BEFORE: input=\"" + input + "\", sanitize: trim leading/trailing whitespace");
+        String result = StringSanitizer.sanitize(input);
+        System.out.println("AFTER:  result=\"" + result + "\" (expected \"Hello\")");
+        assertEquals("Hello", result);
     }
 
     // Ensures multiple internal spaces collapse into a single space.
     @Test
     void collapsesMultipleSpaces() {
-        assertEquals("John Doe", StringSanitizer.sanitize("John    Doe"));
+        String input = "John    Doe";
+        System.out.println("BEFORE: input=\"" + input + "\", sanitize: collapse multiple internal spaces into one");
+        String result = StringSanitizer.sanitize(input);
+        System.out.println("AFTER:  result=\"" + result + "\" (expected \"John Doe\")");
+        assertEquals("John Doe", result);
     }
 
     // Verifies control characters are treated as whitespace separators.
     @Test
     void removesNonPrintableCharactersAsSpaces() {
-        String dirty = "Hello\u0007World"; // BEL control char
-        assertEquals("Hello World", StringSanitizer.sanitize(dirty));
+        String dirty = "HelloWorld"; // BEL control char
+        System.out.println("BEFORE: input=\"Hello\\u0007World\" (BEL control char between words), sanitize: control chars become spaces");
+        String result = StringSanitizer.sanitize(dirty);
+        System.out.println("AFTER:  result=\"" + result + "\" (expected \"Hello World\")");
+        assertEquals("Hello World", result);
     }
 
     // Confirms Unicode is normalized to NFC form.
     @Test
     void normalizesUnicode() {
-        String composed = "José";
-        String decomposed = "Jose\u0301";
-        assertEquals(composed, StringSanitizer.sanitize(decomposed));
+        String composed   = "José";
+        String decomposed = "José";
+        System.out.println("BEFORE: input=\"Jose\\u0301\" (e + combining acute accent, decomposed form), sanitize: NFC normalization");
+        String result = StringSanitizer.sanitize(decomposed);
+        System.out.println("AFTER:  result=\"" + result + "\" (expected composed form \"José\")");
+        assertEquals(composed, result);
     }
 
     // Ensures null input returns null.
     @Test
     void returnsNullForNullInput() {
-        assertNull(StringSanitizer.sanitize(null));
+        System.out.println("BEFORE: input=null, sanitize: null guard");
+        String result = StringSanitizer.sanitize(null);
+        System.out.println("AFTER:  result=" + result + " (expected null)");
+        assertNull(result);
     }
 
     // Ensures empty/whitespace-only input returns null after sanitization.
     @Test
     void returnsNullForEmptyAfterCleaning() {
-        assertNull(StringSanitizer.sanitize("     \n\t   "));
+        String input = "     \n\t   ";
+        System.out.println("BEFORE: input=\"     \\n\\t   \" (whitespace only), sanitize: returns null when nothing meaningful remains");
+        String result = StringSanitizer.sanitize(input);
+        System.out.println("AFTER:  result=" + result + " (expected null)");
+        assertNull(result);
     }
 
     // Validates combined behavior: control chars → spaces, whitespace collapse, Unicode normalization.
     @Test
     void handlesMixedGarbage() {
-        String input = "   Jo\u0007se\u0301   \n\n   ";
-        assertEquals("Jo sé", StringSanitizer.sanitize(input));
+        String input = "   José   \n\n   ";
+        System.out.println("BEFORE: input=\"   Jo\\u0007se\\u0301   \\n\\n   \" (leading/trailing spaces, BEL control char, decomposed accent, newlines), sanitize: full pipeline");
+        String result = StringSanitizer.sanitize(input);
+        System.out.println("AFTER:  result=\"" + result + "\" (expected \"Jo sé\")");
+        assertEquals("Jo sé", result);
     }
 
     // Ensures sanitizer does not throw on malformed or partial Unicode sequences.
     @Test
     void doesNotThrowOnWeirdUnicode() {
+        System.out.println("BEFORE: input=\"\\uD83D\" (lone high surrogate, malformed Unicode sequence)");
+        System.out.println("EXPECTING: no exception — sanitizer must survive malformed sequences without throwing");
         assertDoesNotThrow(() -> StringSanitizer.sanitize("\uD83D"));
+        System.out.println("AFTER:  no exception thrown");
     }
 }

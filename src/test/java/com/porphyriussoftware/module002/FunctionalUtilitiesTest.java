@@ -15,29 +15,46 @@ class FunctionalUtilitiesTest {
 
     @Test
     void cleanShouldReturnDefaultForNullOrBlank() {
-        assertEquals("default", OptionalUtils.clean(null, "default"));
-        assertEquals("default", OptionalUtils.clean("   ", "default"));
+        System.out.println("BEFORE: inputs=null and \"   \", clean: return fallback when input is null or blank");
+        String r1 = OptionalUtils.clean(null, "default");
+        String r2 = OptionalUtils.clean("   ", "default");
+        System.out.println("AFTER:  clean(null)=\"" + r1 + "\", clean(\"   \")=\"" + r2 + "\" (both expected \"default\")");
+        assertEquals("default", r1);
+        assertEquals("default", r2);
     }
 
     @Test
     void cleanShouldTrimAndReturnValue() {
-        assertEquals("Hello", OptionalUtils.clean("  Hello  ", "default"));
+        System.out.println("BEFORE: input=\"  Hello  \", clean: trim and return non-blank value");
+        String result = OptionalUtils.clean("  Hello  ", "default");
+        System.out.println("AFTER:  result=\"" + result + "\" (expected \"Hello\")");
+        assertEquals("Hello", result);
     }
 
     @Test
     void processShouldUppercaseAndTrim() {
-        assertEquals("HELLO", OptionalUtils.process("  hello  "));
+        System.out.println("BEFORE: input=\"  hello  \", process: trim and uppercase");
+        String result = OptionalUtils.process("  hello  ");
+        System.out.println("AFTER:  result=\"" + result + "\" (expected \"HELLO\")");
+        assertEquals("HELLO", result);
     }
 
     @Test
     void processShouldReturnNullForBlankOrNull() {
-        assertNull(OptionalUtils.process("   "));
-        assertNull(OptionalUtils.process(null));
+        System.out.println("BEFORE: inputs=\"   \" and null, process: return null when input is blank or null");
+        String r1 = OptionalUtils.process("   ");
+        String r2 = OptionalUtils.process(null);
+        System.out.println("AFTER:  process(\"   \")=" + r1 + ", process(null)=" + r2 + " (both expected null)");
+        assertNull(r1);
+        assertNull(r2);
     }
 
     @Test
     void processShouldHandleUnicode() {
-        assertEquals("É", OptionalUtils.process("  é  "));
+        System.out.println("BEFORE: input=\"  é  \", process: trim and uppercase Unicode character");
+        String result = OptionalUtils.process("  é  ");
+        System.out.println("AFTER:  result=\"" + result + "\" (expected \"É\")");
+        assertEquals("É", result);
     }
 
 
@@ -48,69 +65,95 @@ class FunctionalUtilitiesTest {
     @Test
     void filterStartingWithShouldReturnMatchingValues() {
         List<String> input = List.of("Alice", "Bob", "Andrew", "Charlie");
-        List<String> expected = List.of("Alice", "Andrew");
-
-        assertEquals(expected, StreamUtils.filterStartingWith(input, "A"));
+        System.out.println("BEFORE: input=" + input + ", filterStartingWith prefix=\"A\"");
+        List<String> result = StreamUtils.filterStartingWith(input, "A");
+        System.out.println("AFTER:  result=" + result + " (expected [Alice, Andrew])");
+        assertEquals(List.of("Alice", "Andrew"), result);
     }
 
     @Test
     void filterStartingWithShouldHandleNullList() {
-        assertTrue(StreamUtils.filterStartingWith(null, "A").isEmpty());
+        System.out.println("BEFORE: input=null, filterStartingWith: null guard");
+        List<String> result = StreamUtils.filterStartingWith(null, "A");
+        System.out.println("AFTER:  result=" + result + " (expected empty)");
+        assertTrue(result.isEmpty());
     }
 
     @Test
     void filterStartingWithShouldIgnoreNullElements() {
         List<String> input = Arrays.asList("Alice", null, "Andrew");
-        List<String> expected = List.of("Alice", "Andrew");
-
-        assertEquals(expected, StreamUtils.filterStartingWith(input, "A"));
+        System.out.println("BEFORE: input=" + input + " (contains null), filterStartingWith prefix=\"A\": null elements skipped");
+        List<String> result = StreamUtils.filterStartingWith(input, "A");
+        System.out.println("AFTER:  result=" + result + " (expected [Alice, Andrew])");
+        assertEquals(List.of("Alice", "Andrew"), result);
     }
 
     @Test
     void filterStartingWithShouldReturnEmptyWhenNoMatches() {
         List<String> input = List.of("Bob", "Charlie");
-        assertTrue(StreamUtils.filterStartingWith(input, "A").isEmpty());
+        System.out.println("BEFORE: input=" + input + ", filterStartingWith prefix=\"A\" (no matches expected)");
+        List<String> result = StreamUtils.filterStartingWith(input, "A");
+        System.out.println("AFTER:  result=" + result + " (expected empty)");
+        assertTrue(result.isEmpty());
     }
 
     @Test
     void uppercaseAllShouldUppercaseValues() {
         List<String> input = List.of("a", "b", "c");
-        List<String> expected = List.of("A", "B", "C");
-
-        assertEquals(expected, StreamUtils.uppercaseAll(input));
+        System.out.println("BEFORE: input=" + input + ", uppercaseAll: uppercase each element");
+        List<String> result = StreamUtils.uppercaseAll(input);
+        System.out.println("AFTER:  result=" + result + " (expected [A, B, C])");
+        assertEquals(List.of("A", "B", "C"), result);
     }
 
     @Test
     void uppercaseAllShouldHandleUnicode() {
-        assertEquals("É", StreamUtils.uppercaseAll(List.of("é")).get(0));
+        System.out.println("BEFORE: input=[\"é\"], uppercaseAll: uppercase Unicode character");
+        String result = StreamUtils.uppercaseAll(List.of("é")).get(0);
+        System.out.println("AFTER:  result=\"" + result + "\" (expected \"É\")");
+        assertEquals("É", result);
     }
 
     @Test
     void uppercaseAllShouldHandleNullList() {
-        assertTrue(StreamUtils.uppercaseAll(null).isEmpty());
+        System.out.println("BEFORE: input=null, uppercaseAll: null guard");
+        List<String> result = StreamUtils.uppercaseAll(null);
+        System.out.println("AFTER:  result=" + result + " (expected empty)");
+        assertTrue(result.isEmpty());
     }
 
     @Test
     void uppercaseAllShouldIgnoreNullElements() {
         List<String> input = Arrays.asList("a", null, "b");
-        List<String> expected = List.of("A", "B");
-
-        assertEquals(expected, StreamUtils.uppercaseAll(input));
+        System.out.println("BEFORE: input=" + input + " (contains null), uppercaseAll: null elements skipped");
+        List<String> result = StreamUtils.uppercaseAll(input);
+        System.out.println("AFTER:  result=" + result + " (expected [A, B])");
+        assertEquals(List.of("A", "B"), result);
     }
 
     @Test
     void sumShouldAddNumbers() {
-        assertEquals(15, StreamUtils.sum(List.of(1, 2, 3, 4, 5)));
+        List<Integer> input = List.of(1, 2, 3, 4, 5);
+        System.out.println("BEFORE: input=" + input + ", sum: add all integers");
+        int result = StreamUtils.sum(input);
+        System.out.println("AFTER:  result=" + result + " (expected 15)");
+        assertEquals(15, result);
     }
 
     @Test
     void sumShouldHandleNullList() {
-        assertEquals(0, StreamUtils.sum(null));
+        System.out.println("BEFORE: input=null, sum: null guard");
+        int result = StreamUtils.sum(null);
+        System.out.println("AFTER:  result=" + result + " (expected 0)");
+        assertEquals(0, result);
     }
 
     @Test
     void sumShouldHandleEmptyList() {
-        assertEquals(0, StreamUtils.sum(List.of()));
+        System.out.println("BEFORE: input=[] (empty), sum: empty guard");
+        int result = StreamUtils.sum(List.of());
+        System.out.println("AFTER:  result=" + result + " (expected 0)");
+        assertEquals(0, result);
     }
 
 
@@ -121,27 +164,35 @@ class FunctionalUtilitiesTest {
     @Test
     void smartFilterShouldCleanTrimFilterAndUppercase() {
         List<String> input = Arrays.asList("  alice  ", null, "bob", "   ", "andrew");
-        List<String> expected = List.of("ALICE", "ANDREW");
-
-        assertEquals(expected, SmartFilter.cleanAndFilter(input, "a"));
+        System.out.println("BEFORE: input=" + input + ", cleanAndFilter prefix=\"a\": trim, drop nulls/blank, filter by prefix, uppercase");
+        List<String> result = SmartFilter.cleanAndFilter(input, "a");
+        System.out.println("AFTER:  result=" + result + " (expected [ALICE, ANDREW])");
+        assertEquals(List.of("ALICE", "ANDREW"), result);
     }
 
     @Test
     void smartFilterShouldHandleNullList() {
-        assertTrue(SmartFilter.cleanAndFilter(null, "a").isEmpty());
+        System.out.println("BEFORE: input=null, cleanAndFilter: null guard");
+        List<String> result = SmartFilter.cleanAndFilter(null, "a");
+        System.out.println("AFTER:  result=" + result + " (expected empty)");
+        assertTrue(result.isEmpty());
     }
 
     @Test
     void smartFilterShouldReturnEmptyWhenNoMatches() {
         List<String> input = List.of("bob", "charlie");
-        assertTrue(SmartFilter.cleanAndFilter(input, "a").isEmpty());
+        System.out.println("BEFORE: input=" + input + ", cleanAndFilter prefix=\"a\" (no matches expected)");
+        List<String> result = SmartFilter.cleanAndFilter(input, "a");
+        System.out.println("AFTER:  result=" + result + " (expected empty)");
+        assertTrue(result.isEmpty());
     }
 
     @Test
     void smartFilterShouldBeCaseSensitive() {
         List<String> input = List.of("Alice", "andrew");
-        List<String> expected = List.of("ANDREW");
-
-        assertEquals(expected, SmartFilter.cleanAndFilter(input, "a"));
+        System.out.println("BEFORE: input=" + input + ", cleanAndFilter prefix=\"a\" (case-sensitive — \"Alice\" starts with uppercase A)");
+        List<String> result = SmartFilter.cleanAndFilter(input, "a");
+        System.out.println("AFTER:  result=" + result + " (expected [ANDREW] — \"Alice\" rejected, case-sensitive match)");
+        assertEquals(List.of("ANDREW"), result);
     }
 }
