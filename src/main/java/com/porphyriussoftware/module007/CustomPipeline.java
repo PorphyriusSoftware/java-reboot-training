@@ -19,7 +19,7 @@ import java.util.function.Predicate;
  * applying its operation in the process. This wrapping is
  * <strong>pipeline fusion</strong> — no intermediate collections are created.
  *
- * <p>When a terminal operation is called, {@link #evaluate(Sink)} builds the
+ * <p>When a terminal operation is called, {@code evaluate()} builds the
  * Sink chain from terminal back to source, then drives the Spliterator:
  *
  * <pre>
@@ -160,7 +160,7 @@ public final class CustomPipeline<T> {
      * The source of elements for this pipeline.
      *
      * <p>Stored as a {@link Collection} rather than a {@link Spliterator} so that
-     * each call to {@link #evaluate(Sink)} can obtain a fresh cursor via
+     * each call to {@code evaluate()} can obtain a fresh cursor via
      * {@link Collection#spliterator()}. This makes the pipeline reusable and
      * allows branching from the same base instance without one branch corrupting
      * the other.

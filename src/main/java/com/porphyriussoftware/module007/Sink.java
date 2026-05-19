@@ -34,7 +34,6 @@ public interface Sink<T> {
      * or predicate, then forwarding to the downstream Sink.
      *
      * @param element the element to process
-     * @return
      */
     void accept(T element);
 
